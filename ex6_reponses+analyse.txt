@@ -1,0 +1,27 @@
+1. La fonction reconstitueReseauArbreQUat est la plus lente des trois.
+Celle modelisee avec une table de hachage devient de plus en plus rapide en fonction de la taille M de la table de hachage et la vitesse de l'algo devient constante lorsque M est superieure au nombre total de points (ou noeuds) (12 noeuds avec 00014_burma.res). Plus le load factor alpha (nbPointsTotal/M) est petit, moins on a de collisions et plus l'algo est rapide et lorsque alpha <= 1, la vitesse de l'algo devient constante. Lorsque M = 1, on a la meme vitesse que l'algo avec une liste chainee (10 microsecondes)
+
+
+4. Le temps de calcul pour la fonction reconstitueReseauListe en fonction du nombre de chaines suit une allure polynomiale et est beaucoup plus lente que pour les deux autres structures.
+Ensuite, reconsitueReseauHachage est meilleure que celle de l'arbre quat et plus on diminue le load factor (alpha allant de 10 a 5/8), plus l'algo est rapide. 
+
+
+/* ------------------------------------------------------------------------------------------------------------- */ 
+
+
+Soit n le nombre de noeuds (ou points) et M la taille de la table de hachage
+Soit le load factor alpha = n/M
+
+			/* Analyse complexite pire-cas recherche */ 
+On a une complexite moyenne en O(1+alpha) et pire-cas en O(n) pour la fonction rechercheCreeNoeudHachage. 
+On a une complexite pire-cas en O(n) pour la fonction rechercheCreeNoeudListe (point pas present ou en derniere position de la liste).
+On a une complexite pire-cas en O(h) pour la fonction rechercheCreeNoeudArbreQuat avec h la hauteur de l'arbre quat et dans le pire des cas h peut etre tres grand: si on a 2 points tres proches (au sud ouest par exemple), on aura alors beaucoup de cellules internes a parcourir avant d'atteindre la feuille que l'on cherche. 
+Remarque: on ne peut pas avoir 2 points de memes coordonnees dans l'arbre quat
+Dans le cas d'un arbre quaternaire parfait (points (ou noeuds) du reseau uniformement repartis), on a 4^h <= nbNoeudsArbreQuat < 4^(h+1) et donc h = log4(nbNoeudsArbreQuat) en partie entiere  
+
+
+			/* Analyse complexite pire-cas reconstitue */ 
+LC -> O(n²)
+TH -> O(n*(1+alpha))  
+AQ -> O(n*h) h: hauteur de AQ
+
